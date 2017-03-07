@@ -1,0 +1,38 @@
+{
+  "name": "valletta",
+  "version": "1.0.0",
+  "description": "A build tool for creating discourse themes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint index.js"
+  },
+  "bin": {
+    "valletta": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/resin-io/valletta.git"
+  },
+  "contributors": [
+    "Gergely Imreh <gergely@resin.io>",
+    "Lucian Buzzo <lucian@resin.io>"
+  ],
+  "license": "Apache-2.0",
+  "copyright": "Copyright 2016 Resinio Ltd",
+  "companyName": "Resinio Ltd",
+  "bugs": {
+    "url": "https://github.com/resin-io/valletta/issues"
+  },
+  "homepage": "https://github.com/resin-io/valletta#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "find-config": "^1.0.0",
+    "lodash": "^4.17.4",
+    "mkdirp": "^0.5.1",
+    "sanitize-filename": "^1.6.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.17.1"
+  }
+}
