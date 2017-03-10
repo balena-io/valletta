@@ -5,6 +5,9 @@
     module.exports = valletta
 
     if (!module.parent) {
-      valletta.generate()
+      valletta.generate(null, true)
+      .then((outputPath) => {
+        console.log('Done! A new them file has been  generated:', outputPath)
+      })
     }
 })()
