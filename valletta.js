@@ -6,11 +6,15 @@ const sanitize = require('sanitize-filename')
 const mkdirp = require('mkdirp')
 const Promise = require('bluebird')
 
-exports.generate = (options) => {
+exports.generate = (options, cli = false) => {
+  // Default to the directory of the calling module
+  const callingDir = cli ?
+    process.cwd() :
+    path.dirname(module.parent.filename)
   let defaultConfig = {
     name: 'custom theme',
-    srcDir: __dirname,
-    outputDir: __dirname,
+    srcDir: callingDir,
+    outputDir: callingDir,
     enabled: false,
   }
 
@@ -52,6 +56,11 @@ exports.generate = (options) => {
     }
   }
 
+  // Unless the outputDir is absolute, join it to the calling directory
+  config.srcDir = config.srcDir.charAt(0) === '/' ?
+    path.normalize(config.srcDir) :
+    path.normalize(path.join(callingDir, config.srcDir))
+
   return Promise.map(_.keys(defaultConfigFiles), (key) => {
     if (config.files && config.files[key] === '') {
       return
@@ -67,7 +76,7 @@ exports.generate = (options) => {
       } catch (err) {
         // Only warn users if they are explicitly trying to load a file
         if (!defaultLoad) {
-          console.log('Couldn\'t load ' + key + ' at ' + filePath + ' - skipping')
+          console.error('Couldn\'t load ' + key + ' at ' + filePath + ' - skipping')
         }
         file = ''
       }
@@ -89,7 +98,12 @@ exports.generate = (options) => {
     output.enabled = config.enabled
 
     const outputFileName = sanitize(config.name).replace(/ /g, '_').toLowerCase() + '.dcstyle.json'
-    const outputDir = path.normalize(config.outputDir)
+
+    // Unless the outputDir is absolute, join it to the calling directory
+    const outputDir = config.outputDir.charAt(0) === '/' ?
+      path.normalize(config.outputDir) :
+      path.normalize(path.join(callingDir, config.outputDir))
+
     const finalPath = path.join(outputDir, outputFileName)
 
     mkdirp.sync(outputDir)
