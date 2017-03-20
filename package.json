@@ -28,6 +28,7 @@
   "homepage": "https://github.com/resin-io/valletta#readme",
   "dependencies": {
     "bluebird": "^3.5.0",
+    "commander": "^2.9.0",
     "find-config": "^1.0.0",
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",

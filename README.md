@@ -25,7 +25,7 @@ valletta.generate({
 or from the command line
 
 ```
-$ valletta
+$ valletta build
 ```
 
 By default valletta will look for the first matching config file called
@@ -94,7 +94,7 @@ The directory to write the generated theme file to. If the directory
 doesn't exist it will be created automatically.  
 Defaults to the current directory.
 
-#### options.files
+#### <a name="options_files"></a>options.files
 An object containing key / pair values for theme files.
 The value can either be a string, where the value
 is the path to the theme file, relative to the `srcDir` option.  
@@ -114,4 +114,25 @@ Possible keys for this option are:
 * `mobile_header`: corresponds to the **Header** tab in the 📱 section on discourse and defaults to `mobile_header.tpl.html`,
 * `mobile_top`: corresponds to the **Top** tab in the 📱 section on discourse and defaults to `mobile_top.tpl.html`,
 * `mobile_footer`: corresponds to the **Footer** tab in the 📱 section on discourse and defaults to `mobile_footer.tpl.html`,
+
+## CLI
+
+### build
+
+```
+$ valletta build
+```
+
+Generates a JSON theme file. By default it will use files in the current 
+directory and output JSON in the current directory. If a `valletta.config.js` 
+file is found, then it's options will be used instead.
+
+### init
+
+```
+$ valletta init
+```
+
+Generates a blank theme file for each of the possible file options listed
+[here](#options_files). Files are generated in the current working directory.
 
