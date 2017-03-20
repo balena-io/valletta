@@ -7,7 +7,7 @@
     if (!module.parent) {
       valletta.generate(null, true)
       .then((outputPath) => {
-        console.log('Done! A new them file has been  generated:', outputPath)
+        console.log('Done! A new theme file has been  generated:', outputPath)
       })
     }
 })()
