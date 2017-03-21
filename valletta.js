@@ -6,6 +6,53 @@ const sanitize = require('sanitize-filename')
 const mkdirp = require('mkdirp')
 const Promise = require('bluebird')
 
+
+const defaultConfigFiles = {
+  // CSS
+  stylesheet: 'stylesheet.css',
+  // Header
+  header: 'header.tpl.html',
+  // Top
+  top: 'top.tpl.html',
+  // Footer
+  footer: 'footer.tpl.html',
+  // </head>
+  head_tag: 'head_tag.tpl.html',
+  // </body>
+  body_tag: 'body_tag.tpl.html',
+  // Embedded CSS
+  embedded_css: 'embedded_css.css',
+  // CSS in the 📱 section
+  mobile_stylesheet: 'mobile_stylesheet.css',
+  // Header in the 📱 section
+  mobile_header: 'mobile_header.tpl.html',
+  // Top in the 📱 section
+  mobile_top: 'mobile_top.tpl.html',
+  // Footer in the 📱 section
+  mobile_footer: 'mobile_footer.tpl.html',
+}
+
+// Initilises empty theme files in your current working directory
+exports.init = (cli = false) => {
+  // Default to the directory of the calling module
+  const callingDir = cli ?
+    process.cwd() :
+    path.dirname(module.parent.filename)
+
+  if (cli) {
+    console.log('Initialising theme files...')
+  }
+
+  _.forIn(defaultConfigFiles, (value) => {
+    const filePath = path.join(callingDir, value)
+    fs.openSync(filePath, 'w')
+
+    if (cli) {
+      console.log('Created', filePath)
+    }
+  })
+}
+
 exports.generate = (options, cli = false) => {
   // Default to the directory of the calling module
   const callingDir = cli ?
@@ -16,31 +63,6 @@ exports.generate = (options, cli = false) => {
     srcDir: callingDir,
     outputDir: callingDir,
     enabled: false,
-  }
-
-  let defaultConfigFiles = {
-    // CSS
-    stylesheet: 'stylesheet.css',
-    // Header
-    header: 'header.tpl.html',
-    // Top
-    top: 'top.tpl.html',
-    // Footer
-    footer: 'footer.tpl.html',
-    // </head>
-    head_tag: 'head_tag.tpl.html',
-    // </body>
-    body_tag: 'body_tag.tpl.html',
-    // Embedded CSS
-    embedded_css: 'embedded_css.css',
-    // CSS in the 📱 section
-    mobile_stylesheet: 'mobile_stylesheet.css',
-    // Header in the 📱 section
-    mobile_header: 'mobile_header.tpl.html',
-    // Top in the 📱 section
-    mobile_top: 'mobile_top.tpl.html',
-    // Footer in the 📱 section
-    mobile_footer: 'mobile_footer.tpl.html',
   }
 
   let config
