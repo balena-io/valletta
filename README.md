@@ -8,6 +8,12 @@ interface, allowing you to use your existing workflow and source control.
 
 ***
 
+## Installation
+
+```sh 
+$ npm install --save valletta
+```
+
 ## Usage
 
 You can use valletta from within a node script
