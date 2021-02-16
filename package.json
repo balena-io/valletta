@@ -1,6 +1,6 @@
 {
   "name": "valletta",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A build tool for creating discourse themes",
   "main": "index.js",
   "scripts": {
